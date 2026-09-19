@@ -1,0 +1,349 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --text-primary: #450a0a;
+    --text-secondary: #78350f;
+    --text-muted: #9a3412;
+  }
+
+  body {
+    background-color: #fffbf5;
+    color: #450a0a;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #450a0a;
+  }
+}
+
+/* Custom Festive Red & Orange Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff7ed;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fed7aa;
+  border-radius: 4px;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* Form Input Global Styling for Luxury Red-Orange Studio */
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  background-color: #ffffff !important;
+  color: #450a0a !important;
+  border-color: #fed7aa !important;
+  font-weight: 500;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #b45309 !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #ea580c !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15) !important;
+  color: #450a0a !important;
+}
+
+/* Relatable Rich Text Helper Utilities */
+.text-mahogany-950 { color: #450a0a; }
+.text-mahogany-900 { color: #5c1414; }
+.text-mahogany-800 { color: #7f1d1d; }
+.text-mahogany-700 { color: #991b1b; }
+.text-mahogany-600 { color: #b91c1c; }
+.text-mahogany-500 { color: #dc2626; }
+.text-saffron-muted { color: #9a3412; }
+
+/* Typography helper classes */
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-dancing {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-alex {
+  font-family: 'Alex Brush', cursive;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Indian Script Fonts */
+.font-devanagari {
+  font-family: 'Rozha One', 'Noto Serif Devanagari', 'Gotu', serif;
+}
+
+.font-devanagari-classic {
+  font-family: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
+}
+
+.font-devanagari-yatra {
+  font-family: 'Yatra One', 'Noto Serif Devanagari', cursive;
+}
+
+.font-tamil {
+  font-family: 'Mukta Malar', 'Noto Serif Tamil', serif;
+}
+
+.font-telugu {
+  font-family: 'Tiro Telugu', 'Noto Serif Telugu', serif;
+}
+
+.font-bengali {
+  font-family: 'Tiro Bangla', 'Noto Serif Bengali', serif;
+}
+
+.font-gujarati {
+  font-family: 'Noto Serif Gujarati', serif;
+}
+
+.font-gurmukhi {
+  font-family: 'Tiro Gurmukhi', 'Noto Serif Gurmukhi', serif;
+}
+
+.font-kannada {
+  font-family: 'Tiro Kannada', 'Noto Serif Kannada', serif;
+}
+
+.font-malayalam {
+  font-family: 'Noto Serif Malayalam', serif;
+}
+
+.font-oriya {
+  font-family: 'Noto Serif Oriya', serif;
+}
+
+/* 3D Envelope & Flip Card Classes */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Luxury Red & Saffron Orange Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(249, 115, 22, 0.30);
+  box-shadow: 0 10px 30px -10px rgba(220, 38, 38, 0.10), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(254, 215, 170, 0.85);
+  box-shadow: 0 8px 24px -6px rgba(234, 88, 12, 0.09), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.glass-dropdown {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  box-shadow: 0 20px 50px -10px rgba(185, 28, 28, 0.18), 0 0 25px -5px rgba(249, 115, 22, 0.15);
+}
+
+/* Gradient text utilities */
+.text-orange-gradient {
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #991b1b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #d97706 0%, #ea580c 50%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-red-gradient {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Luxury Red & Saffron Orange Button Utilities */
+.btn-red-orange {
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #b91c1c 100%);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 8px 25px -5px rgba(234, 88, 12, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-red-orange:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -4px rgba(220, 38, 38, 0.6);
+}
+
+/* Rotating Conic Border Glow Effect */
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.border-conic-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-conic-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, rgba(244, 114, 182, 0.4), transparent 30%);
+  animation: rotateGlow 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Professional Keyframe Animations */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(8px) rotate(-1deg); }
+}
+
+@keyframes shimmerSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.35; filter: blur(35px); }
+  50% { opacity: 0.65; filter: blur(50px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 7s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmerSlide 2.5s infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+/* Card hover glow & 3D effect helper */
+.card-hover-glow {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(244, 63, 94, 0.15);
+  border-color: rgba(244, 114, 182, 0.5);
+}
+
+@keyframes foilSweep {
+  0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { transform: translateX(250%) skewX(-20deg); opacity: 0; }
+}
+
+.animate-foil-sweep {
+  animation: foilSweep 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes clickShockwave {
+  0% { transform: scale(0); opacity: 0.9; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.animate-click-shockwave {
+  animation: clickShockwave 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
