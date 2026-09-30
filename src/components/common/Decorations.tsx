@@ -72,6 +72,254 @@ export const RoyalCrestCorner: React.FC<{ position: 'tl' | 'tr' | 'bl' | 'br'; c
   );
 };
 
+export const PeacockCorner: React.FC<{
+  position: 'tl' | 'tr' | 'bl' | 'br';
+  color?: string;
+  size?: number;
+}> = ({ position, color = '#f59e0b', size = 115 }) => {
+  const isRight = position === 'tr' || position === 'br';
+  const isBottom = position === 'bl' || position === 'br';
+
+  return (
+    <div
+      className={`absolute pointer-events-none z-20 ${
+        position === 'tl'
+          ? 'top-2 left-2'
+          : position === 'tr'
+          ? 'top-2 right-2'
+          : position === 'bl'
+          ? 'bottom-2 left-2'
+          : 'bottom-2 right-2'
+      }`}
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        transform: `${isRight ? 'scaleX(-1)' : ''} ${isBottom ? 'scaleY(-1)' : ''}`,
+      }}
+    >
+      <svg
+        viewBox="0 0 140 140"
+        fill="none"
+        className="w-full h-full drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]"
+      >
+        <defs>
+          <linearGradient id={`goldGrad-${position}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#fef08a" />
+            <stop offset="25%" stopColor="#fde047" />
+            <stop offset="60%" stopColor={color} />
+            <stop offset="100%" stopColor="#92400e" />
+          </linearGradient>
+          <linearGradient id={`goldLustre-${position}`} x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#fef9c3" />
+            <stop offset="50%" stopColor={color} />
+            <stop offset="100%" stopColor="#b45309" />
+          </linearGradient>
+        </defs>
+
+        {/* Outer Corner Filigree Frame Brackets */}
+        <path
+          d="M 6 6 L 68 6 M 6 6 L 6 68"
+          stroke={`url(#goldGrad-${position})`}
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 12 12 L 48 12 M 12 12 L 12 48"
+          stroke={`url(#goldGrad-${position})`}
+          strokeWidth="1.2"
+        />
+        <circle cx="6" cy="6" r="3.5" fill="#fef08a" stroke="#92400e" strokeWidth="0.8" />
+        <circle cx="68" cy="6" r="2.5" fill="#fef08a" stroke="#92400e" strokeWidth="0.5" />
+        <circle cx="6" cy="68" r="2.5" fill="#fef08a" stroke="#92400e" strokeWidth="0.5" />
+
+        {/* Corner Scrolled Paisley Motif */}
+        <path
+          d="M 6 42 C 18 36, 32 20, 26 8 C 20 0, 8 10, 10 26 C 12 40, 28 46, 38 43 C 50 39, 56 22, 48 14"
+          stroke={`url(#goldGrad-${position})`}
+          strokeWidth="1.8"
+          fill="none"
+        />
+
+        {/* Peacock Crest Crown (3 delicate royal kalgi stalks with jewels) */}
+        <path d="M 68 32 L 64 19 M 72 30 L 73 16 M 76 31 L 82 20" stroke="#fde047" strokeWidth="1.6" strokeLinecap="round" />
+        <circle cx="64" cy="18" r="2.4" fill="#fef08a" stroke="#78350f" strokeWidth="0.6" />
+        <circle cx="73" cy="15" r="2.6" fill="#fef08a" stroke="#78350f" strokeWidth="0.6" />
+        <circle cx="82" cy="19" r="2.4" fill="#fef08a" stroke="#78350f" strokeWidth="0.6" />
+
+        {/* Beak, Head & Crown */}
+        <path
+          d="M 82 34 L 94 36 L 84 40 Z"
+          fill="#fef08a"
+          stroke="#78350f"
+          strokeWidth="0.6"
+        />
+        <ellipse cx="74" cy="36" rx="8.5" ry="7.5" fill={`url(#goldGrad-${position})`} stroke="#78350f" strokeWidth="0.9" />
+        <circle cx="77" cy="35" r="1.6" fill="#0f172a" />
+        <circle cx="77.6" cy="34.4" r="0.6" fill="#ffffff" />
+
+        {/* Graceful S-Curved Neck & Royal Breast */}
+        <path
+          d="M 70 41 C 66 48, 68 56, 75 62 C 82 68, 86 78, 80 90 C 74 100, 60 102, 52 95 C 48 90, 50 82, 56 78 C 64 74, 66 65, 60 55 C 56 50, 60 42, 68 41 Z"
+          fill={`url(#goldGrad-${position})`}
+          stroke="#78350f"
+          strokeWidth="1.3"
+        />
+
+        {/* Wing with Layered Gold Scales */}
+        <path
+          d="M 62 65 C 55 70, 52 80, 56 88 C 60 94, 68 96, 74 90 C 78 84, 76 74, 70 68 Z"
+          fill="#92400e"
+          stroke="#fef08a"
+          strokeWidth="1.2"
+        />
+        <path d="M 58 72 C 62 70, 68 72, 70 76 M 56 78 C 60 76, 68 78, 72 82 M 58 84 C 62 82, 68 84, 70 88" stroke="#fde047" strokeWidth="1.1" />
+
+        {/* Cascading Paisley Plumes (Mayur Feather Flourishes) */}
+        {/* Plume 1 */}
+        <path
+          d="M 50 92 C 38 98, 24 92, 18 78 C 12 64, 20 48, 34 42 C 45 38, 52 46, 48 56 C 44 66, 32 70, 26 62"
+          stroke={`url(#goldGrad-${position})`}
+          strokeWidth="2.2"
+          fill="none"
+        />
+        <ellipse cx="26" cy="62" rx="5.5" ry="7.5" fill={`url(#goldGrad-${position})`} stroke="#78350f" strokeWidth="0.9" />
+        <circle cx="26" cy="62" r="2.8" fill="#fef08a" />
+
+        {/* Plume 2 */}
+        <path
+          d="M 52 98 C 42 110, 28 116, 16 108 C 4 98, 4 80, 14 68 C 22 58, 34 60, 36 70 C 38 80, 28 88, 20 82"
+          stroke={`url(#goldGrad-${position})`}
+          strokeWidth="2.4"
+          fill="none"
+        />
+        <ellipse cx="20" cy="82" rx="6.5" ry="8.5" fill={`url(#goldGrad-${position})`} stroke="#78350f" strokeWidth="0.9" />
+        <circle cx="20" cy="82" r="3.2" fill="#fef08a" />
+
+        {/* Plume 3 */}
+        <path
+          d="M 58 104 C 48 120, 32 130, 18 126 C 6 122, 2 108, 8 96 C 14 84, 26 84, 28 92 C 30 100, 22 106, 16 102"
+          stroke={`url(#goldGrad-${position})`}
+          strokeWidth="2.2"
+          fill="none"
+        />
+        <ellipse cx="16" cy="102" rx="5.5" ry="7.5" fill={`url(#goldGrad-${position})`} stroke="#78350f" strokeWidth="0.9" />
+        <circle cx="16" cy="102" r="2.8" fill="#fef08a" />
+
+        {/* Feather Quill Ribs */}
+        <path d="M 54 94 Q 38 82 28 64" stroke="#fde047" strokeWidth="1.2" strokeDasharray="2.5 1.5" />
+        <path d="M 56 100 Q 36 94 22 84" stroke="#fde047" strokeWidth="1.2" strokeDasharray="2.5 1.5" />
+        <path d="M 60 106 Q 38 108 18 104" stroke="#fde047" strokeWidth="1.2" strokeDasharray="2.5 1.5" />
+
+        {/* Golden Stardust Accents */}
+        <circle cx="48" cy="30" r="1.8" fill="#fde047" />
+        <circle cx="36" cy="22" r="1.4" fill="#fef08a" />
+        <circle cx="20" cy="34" r="1.6" fill="#fde047" />
+        <circle cx="10" cy="52" r="1.4" fill="#fef08a" />
+        <circle cx="6" cy="74" r="1.6" fill="#fde047" />
+        <circle cx="8" cy="118" r="1.4" fill="#fef08a" />
+        <circle cx="30" cy="132" r="1.6" fill="#fde047" />
+        <circle cx="50" cy="128" r="1.4" fill="#fef08a" />
+      </svg>
+    </div>
+  );
+};
+
+export const BaroqueGoldPhotoFrame: React.FC<{
+  imageSrc?: string;
+  alt?: string;
+  className?: string;
+  width?: number | string;
+  height?: number | string;
+}> = ({
+  imageSrc = '/images/wedding_couple.jpg',
+  alt = 'Wedding Couple',
+  className = '',
+  width = 155,
+  height = 190,
+}) => {
+  return (
+    <div
+      className={`relative mx-auto flex items-center justify-center select-none ${className}`}
+      style={{
+        width: typeof width === 'number' ? `${width}px` : width,
+        height: typeof height === 'number' ? `${height}px` : height,
+      }}
+    >
+      {/* Outer Carved Baroque Gold Moulding (Hollow Frame Border) */}
+      <div
+        className="absolute -inset-2.5 rounded-lg pointer-events-none z-10"
+        style={{
+          border: '4px solid #f59e0b',
+          boxShadow: `
+            0 12px 28px rgba(0, 0, 0, 0.75),
+            0 0 0 1.5px #78350f,
+            0 0 0 3px #fef08a,
+            0 0 0 4.5px #92400e,
+            inset 0 0 6px rgba(0, 0, 0, 0.7),
+            0 0 15px rgba(245, 158, 11, 0.35)
+          `,
+        }}
+      >
+        {/* Inner Sculpted Bevel Line */}
+        <div
+          className="w-full h-full rounded-sm pointer-events-none"
+          style={{
+            border: '1.5px solid #fef3c7',
+            boxShadow: 'inset 0 0 4px rgba(217, 119, 6, 0.7)',
+          }}
+        />
+      </div>
+
+      {/* Frame 4 Corner Carved Scrolled Rosettes */}
+      <div className="absolute -top-3.5 -left-3.5 w-6 h-6 pointer-events-none z-20 text-[#fef08a] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="8" fill="#d97706" stroke="#fef08a" strokeWidth="1.5" />
+          <path d="M12 5 L14 10 L19 12 L14 14 L12 19 L10 14 L5 12 L10 10 Z" fill="#fef08a" />
+        </svg>
+      </div>
+      <div className="absolute -top-3.5 -right-3.5 w-6 h-6 pointer-events-none z-20 text-[#fef08a] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="8" fill="#d97706" stroke="#fef08a" strokeWidth="1.5" />
+          <path d="M12 5 L14 10 L19 12 L14 14 L12 19 L10 14 L5 12 L10 10 Z" fill="#fef08a" />
+        </svg>
+      </div>
+      <div className="absolute -bottom-3.5 -left-3.5 w-6 h-6 pointer-events-none z-20 text-[#fef08a] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="8" fill="#d97706" stroke="#fef08a" strokeWidth="1.5" />
+          <path d="M12 5 L14 10 L19 12 L14 14 L12 19 L10 14 L5 12 L10 10 Z" fill="#fef08a" />
+        </svg>
+      </div>
+      <div className="absolute -bottom-3.5 -right-3.5 w-6 h-6 pointer-events-none z-20 text-[#fef08a] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="8" fill="#d97706" stroke="#fef08a" strokeWidth="1.5" />
+          <path d="M12 5 L14 10 L19 12 L14 14 L12 19 L10 14 L5 12 L10 10 Z" fill="#fef08a" />
+        </svg>
+      </div>
+
+      {/* Inside Photo with Radiant Gold Vignette */}
+      <div className="relative w-full h-full overflow-hidden rounded shadow-inner z-0 bg-[#2d0515] flex items-center justify-center">
+        <img
+          key={imageSrc || 'default'}
+          src={imageSrc || '/images/wedding_couple.jpg'}
+          alt={alt}
+          className="w-full h-full object-cover object-center"
+          onError={(e) => {
+            // Fallback to default local wedding couple if external link fails
+            (e.target as HTMLImageElement).src = '/images/wedding_couple.jpg';
+          }}
+        />
+        {/* Soft Golden Sunset Glow Overlay on Photo */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle at 50% 35%, rgba(254, 240, 138, 0.12) 0%, transparent 65%), linear-gradient(to top, rgba(45, 5, 21, 0.25) 0%, transparent 40%)',
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
 export const MotifRenderer: React.FC<{ motifId: string; color?: string; size?: number; className?: string }> = ({
   motifId,
   color = '#d97706',
@@ -372,6 +620,34 @@ export const BackgroundPatternRenderer: React.FC<{ pattern: string; color?: stri
     );
   }
 
+  if (pattern === 'quilted-lattice' || pattern === 'royal-crosshatch') {
+    return (
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Diamond quilted crosshatch lattice with intersection dots */}
+        <svg className="w-full h-full opacity-[0.16]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="quiltedLattice" width="34" height="34" patternUnits="userSpaceOnUse">
+              <path d="M 0 0 L 34 34 M 34 0 L 0 34" stroke={color} strokeWidth="0.85" />
+              <circle cx="17" cy="17" r="1.5" fill={color} />
+              <circle cx="0" cy="0" r="1.2" fill={color} />
+              <circle cx="34" cy="0" r="1.2" fill={color} />
+              <circle cx="0" cy="34" r="1.2" fill={color} />
+              <circle cx="34" cy="34" r="1.2" fill={color} />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#quiltedLattice)" />
+        </svg>
+        {/* Subtle radial dark edge vignette */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.45) 100%)',
+          }}
+        />
+      </div>
+    );
+  }
+
   return null;
 };
 
@@ -381,6 +657,55 @@ export const BorderFrameRenderer: React.FC<{
   className?: string;
 }> = ({ style, color = '#d97706', className = '' }) => {
   if (style === 'none') return null;
+
+  if (style === 'royal-peacock' || style === 'peacock-paisley') {
+    return (
+      <div className={`absolute inset-2.5 pointer-events-none z-10 ${className}`}>
+        {/* Outer and Inner Double Gold Border */}
+        <div
+          className="absolute inset-1 border-[2px] opacity-90 rounded-sm"
+          style={{
+            borderColor: color,
+            boxShadow: 'inset 0 0 14px rgba(245, 158, 11, 0.25)',
+          }}
+        />
+        <div
+          className="absolute inset-3 border-[1px] opacity-75 rounded-sm"
+          style={{ borderColor: color }}
+        />
+
+        {/* Top & Bottom Crown Scrolled Filigree Finials */}
+        <div className="absolute top-1 left-1/2 -translate-x-1/2 w-36 h-6 flex justify-center items-center">
+          <svg viewBox="0 0 140 24" fill="none" className="w-full h-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+            <path d="M 10 12 Q 70 -4 130 12" stroke={color} strokeWidth="1.8" />
+            <path d="M 28 14 Q 70 4 112 14" stroke={color} strokeWidth="1" />
+            <circle cx="70" cy="6" r="3" fill="#fef08a" stroke={color} strokeWidth="0.8" />
+            <circle cx="56" cy="8" r="2" fill="#fef08a" />
+            <circle cx="84" cy="8" r="2" fill="#fef08a" />
+            <circle cx="42" cy="11" r="1.5" fill="#fef08a" />
+            <circle cx="98" cy="11" r="1.5" fill="#fef08a" />
+          </svg>
+        </div>
+        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-36 h-6 flex justify-center items-center rotate-180">
+          <svg viewBox="0 0 140 24" fill="none" className="w-full h-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+            <path d="M 10 12 Q 70 -4 130 12" stroke={color} strokeWidth="1.8" />
+            <path d="M 28 14 Q 70 4 112 14" stroke={color} strokeWidth="1" />
+            <circle cx="70" cy="6" r="3" fill="#fef08a" stroke={color} strokeWidth="0.8" />
+            <circle cx="56" cy="8" r="2" fill="#fef08a" />
+            <circle cx="84" cy="8" r="2" fill="#fef08a" />
+            <circle cx="42" cy="11" r="1.5" fill="#fef08a" />
+            <circle cx="98" cy="11" r="1.5" fill="#fef08a" />
+          </svg>
+        </div>
+
+        {/* 4 Majestic Regal Peacock Corners */}
+        <PeacockCorner position="tl" color={color} size={112} />
+        <PeacockCorner position="tr" color={color} size={112} />
+        <PeacockCorner position="bl" color={color} size={112} />
+        <PeacockCorner position="br" color={color} size={112} />
+      </div>
+    );
+  }
 
   if (style === 'simple') {
     return (

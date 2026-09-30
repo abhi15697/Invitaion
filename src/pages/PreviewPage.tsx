@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useInvitationStore } from '../store/invitationStore';
 import { InvitationRenderer } from '../templates/InvitationRenderer';
-import { EnvelopePreview } from '../components/preview/EnvelopePreview';
 import { getTranslation } from '../data/languages';
 import { soundEffects } from '../utils/soundEffects';
 import {
@@ -26,7 +25,6 @@ import {
   AlertCircle,
   MessageCircle,
   Copy,
-  Mail,
   Eye,
   Smartphone,
 } from 'lucide-react';
@@ -39,15 +37,15 @@ export const PreviewPage: React.FC = () => {
   const activeCategory = useInvitationStore((state) => state.activeCategory);
   const activeTemplateId = useInvitationStore((state) => state.activeTemplateId);
   const customization = useInvitationStore((state) => state.customization);
-  const getActiveFormData = useInvitationStore((state) => state.getActiveFormData);
+  const formDataMap = useInvitationStore((state) => state.formDataMap);
 
   const [loadingAction, setLoadingAction] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedWpText, setCopiedWpText] = useState(false);
-  const [viewMode, setViewMode] = useState<'card' | 'envelope' | 'whatsapp'>('card');
+  const [viewMode, setViewMode] = useState<'card' | 'whatsapp'>('card');
 
-  const formData = getActiveFormData();
+  const formData = formDataMap[activeCategory] || {};
   const t = (key: string) => getTranslation(selectedLanguage, key);
 
   const invitationData = {
@@ -207,7 +205,7 @@ export const PreviewPage: React.FC = () => {
         </div>
       )}
 
-      {/* View Switcher: Card vs 3D Envelope vs WhatsApp Phone */}
+      {/* View Switcher: Card vs WhatsApp Phone */}
       <div className="flex justify-center">
         <div className="p-1.5 bg-white border border-orange-200 rounded-2xl flex items-center space-x-1.5 shadow-md">
           <button
@@ -230,22 +228,6 @@ export const PreviewPage: React.FC = () => {
             type="button"
             onClick={() => {
               soundEffects.playSoftClick();
-              setViewMode('envelope');
-            }}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center space-x-1.5 cursor-pointer ${
-              viewMode === 'envelope'
-                ? 'bg-gradient-to-r from-orange-500 via-red-500 to-rose-600 text-white shadow-md shadow-orange-500/25'
-                : 'text-[#78350f] hover:text-[#450a0a]'
-            }`}
-          >
-            <Mail className="w-3.5 h-3.5" />
-            <span>3D Envelope</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              soundEffects.playSoftClick();
               setViewMode('whatsapp');
             }}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center space-x-1.5 cursor-pointer ${
@@ -262,11 +244,9 @@ export const PreviewPage: React.FC = () => {
 
       {/* Main Container */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left / Center: Full High-Res Canvas or 3D Envelope or Phone Simulator */}
+        {/* Left / Center: Full High-Res Canvas or Phone Simulator */}
         <div className="lg:col-span-7 flex justify-center">
-          {viewMode === 'envelope' ? (
-            <EnvelopePreview data={invitationData} />
-          ) : viewMode === 'whatsapp' ? (
+          {viewMode === 'whatsapp' ? (
             /* WhatsApp iPhone Mockup Simulator */
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -320,15 +300,22 @@ export const PreviewPage: React.FC = () => {
               </div>
             </motion.div>
           ) : (
-            <div className="relative group p-3.5 rounded-3xl bg-white border border-orange-200/80 shadow-xl">
+            <div className="relative group p-4 sm:p-6 rounded-3xl bg-white border border-orange-200/80 shadow-xl flex items-center justify-center">
               {/* The actual exportable canvas target */}
-              <div className="w-[360px] sm:w-[460px] h-[450px] sm:h-[575px] overflow-hidden rounded-2xl relative shadow-2xl bg-black">
+              <div
+                className="relative overflow-hidden rounded-2xl shadow-[0_20px_45px_rgba(0,0,0,0.4)] transition-all duration-200 shrink-0"
+                style={{
+                  width: `${Math.round(540 * 0.85)}px`,
+                  height: `${Math.round(675 * 0.85)}px`,
+                  maxWidth: '100%',
+                }}
+              >
                 <div
                   className="origin-top-left"
                   style={{
+                    width: '540px',
+                    height: '675px',
                     transform: 'scale(0.85)',
-                    marginLeft: '-2px',
-                    marginTop: '-2px',
                   }}
                 >
                   <InvitationRenderer ref={exportRef} data={invitationData} />

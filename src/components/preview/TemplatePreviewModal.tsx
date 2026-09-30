@@ -175,7 +175,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400">
                       <CheckCircle2 className="w-4 h-4 shrink-0" />
                       <span className={currentTheme.isDark ? 'text-slate-200' : 'text-amber-950'}>
-                        3D Wax-sealed Envelope & WhatsApp share
+                        Instant WhatsApp Preview & Download
                       </span>
                     </div>
                   </div>

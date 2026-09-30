@@ -6,7 +6,7 @@ import { TemplateCard } from '../components/cards/TemplateCard';
 import { TemplatePreviewModal } from '../components/preview/TemplatePreviewModal';
 import { useThemeStore } from '../store/themeStore';
 import { soundEffects } from '../utils/soundEffects';
-import { Search, Filter, Sparkles } from 'lucide-react';
+import { Search, Filter, Sparkles, RefreshCw } from 'lucide-react';
 
 const STYLES = [
   'all',
@@ -57,7 +57,7 @@ export const TemplatesGalleryPage: React.FC = () => {
             : 'bg-amber-100/80 border-amber-200 text-amber-950'
         }`}>
           <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-          <span>35+ Handcrafted Royal Boutique Templates</span>
+          <span>Signature Royal Boutique Studio • More Designs Coming Soon</span>
         </div>
         <h1 className={`text-3xl sm:text-5xl font-extrabold font-display ${
           currentTheme.isDark ? 'text-[#fef3c7]' : 'text-[#3f120e]'
@@ -65,7 +65,7 @@ export const TemplatesGalleryPage: React.FC = () => {
           Template <span className="text-orange-gradient font-serif italic">Gallery</span>
         </h1>
         <p className={`text-sm ${currentTheme.isDark ? 'text-slate-300' : 'text-[#78350f]'}`}>
-          Browse our curated collection of luxury royal, floral, traditional Indian, and festive invitation styles.
+          Browse our signature royal boutique wedding design, customizable in 11 Indian languages with live HD export.
         </p>
       </div>
 
@@ -180,30 +180,35 @@ export const TemplatesGalleryPage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className={`text-center py-16 space-y-4 rounded-3xl border ${
+        <div className={`text-center py-16 px-4 space-y-4 rounded-3xl border ${
           currentTheme.isDark
             ? 'bg-slate-900/90 border-amber-400/25 text-slate-100'
             : 'bg-white/90 border-amber-200/80 text-amber-950'
         }`}>
           <div className="w-16 h-16 rounded-full bg-orange-500/10 flex items-center justify-center mx-auto text-orange-500">
-            <Search className="w-8 h-8" />
+            <Sparkles className="w-8 h-8 text-amber-500 animate-pulse" />
           </div>
-          <h3 className={`text-lg font-bold ${currentTheme.isDark ? 'text-slate-100' : 'text-[#3f120e]'}`}>No matching templates found</h3>
-          <p className={`text-xs max-w-sm mx-auto ${currentTheme.isDark ? 'text-slate-400' : 'text-[#9a3412]'}`}>
-            Try resetting your search filters or browse other categories.
+          <h3 className={`text-lg font-bold ${currentTheme.isDark ? 'text-slate-100' : 'text-[#3f120e]'}`}>
+            New Templates In Progress For This Category
+          </h3>
+          <p className={`text-xs max-w-md mx-auto ${currentTheme.isDark ? 'text-slate-400' : 'text-[#9a3412]'}`}>
+            We are crafting new handcrafted boutique templates for each category. You can explore our signature Royal Wedding template or customize now!
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              soundEffects.playSoftClick();
-              setSelectedCategory('all');
-              setSelectedStyle('all');
-              setSearchQuery('');
-            }}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 via-red-500 to-rose-600 text-white font-bold text-xs shadow-md shadow-orange-500/25 cursor-pointer"
-          >
-            Clear All Filters
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                soundEffects.playSoftClick();
+                setSelectedCategory('all');
+                setSelectedStyle('all');
+                setSearchQuery('');
+              }}
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 via-red-500 to-rose-600 text-white font-bold text-xs shadow-md shadow-orange-500/25 cursor-pointer flex items-center space-x-1.5"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>Show Royal Wedding Template</span>
+            </button>
+          </div>
         </div>
       )}
     </div>

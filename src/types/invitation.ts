@@ -227,8 +227,8 @@ export interface InvitationCustomization {
   backgroundColor: string;
   fontFamily: string; // 'serif' | 'cormorant' | 'script' | 'dancing' | 'alex' | 'cinzel' | 'poppins' | 'montserrat' | 'display' | 'devanagari' | 'devanagari-classic' | 'devanagari-yatra' | 'tamil' | 'telugu' | 'bengali' | 'gujarati' | 'gurmukhi' | 'kannada' | 'malayalam' | 'oriya'
   fontSizeScale: 'sm' | 'md' | 'lg';
-  backgroundPattern: 'none' | 'floral' | 'mandala' | 'damask' | 'minimal-dots' | 'marble' | 'stars' | 'geometric' | 'gradient';
-  borderStyle: 'none' | 'simple' | 'double-gold' | 'floral-corners' | 'royal-crest' | 'modern-frame' | 'ornate-arches' | 'jharokha' | 'temple-toran';
+  backgroundPattern: 'none' | 'floral' | 'mandala' | 'damask' | 'minimal-dots' | 'marble' | 'stars' | 'geometric' | 'gradient' | 'quilted-lattice' | 'royal-crosshatch';
+  borderStyle: 'none' | 'simple' | 'double-gold' | 'floral-corners' | 'royal-crest' | 'modern-frame' | 'ornate-arches' | 'jharokha' | 'temple-toran' | 'royal-peacock' | 'peacock-paisley';
   stickers?: StickerInstance[];
   envelopeTheme?: EnvelopeTheme;
 }
@@ -249,6 +249,7 @@ export interface TemplateDefinition {
   tagline: string;
   defaultCustomization: InvitationCustomization;
   accentPreviewColor: string;
+  previewImage?: string;
   badge?: string;
 }
 

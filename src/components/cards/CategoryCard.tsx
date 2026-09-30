@@ -49,7 +49,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
                   ? 'bg-amber-400/15 text-amber-300 border-amber-400/30'
                   : 'bg-amber-100 text-amber-900 border-amber-200'
               }`}>
-                {category.templateCount} Templates
+                {category.templateCount > 0 ? `${category.templateCount} ${category.templateCount === 1 ? 'Design' : 'Designs'}` : 'Coming Soon'}
               </span>
             </div>
 

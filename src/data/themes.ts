@@ -32,6 +32,16 @@ export interface BorderOption {
 
 export const COLOR_PALETTES: ColorPalettePreset[] = [
   {
+    id: 'royal-burgundy-gold',
+    name: 'Royal Burgundy & Antique Gold (शाही मखमली)',
+    primary: '#f59e0b',
+    secondary: '#fef3c7',
+    text: '#fef9c3',
+    accent: '#fbbf24',
+    background: '#2f0516',
+    previewClass: 'from-amber-400 via-yellow-600 to-rose-950',
+  },
+  {
     id: 'royal-gold',
     name: 'Royal Velvet Wine & Gold (शाही ज़री)',
     primary: '#d97706',
@@ -280,6 +290,7 @@ export const FONT_OPTIONS: FontOption[] = [
 ];
 
 export const PATTERN_OPTIONS: PatternOption[] = [
+  { id: 'quilted-lattice', name: 'Royal Quilted Lattice', description: 'Gilded diagonal crosshatch with jewel stardust', previewIcon: '✨' },
   { id: 'none', name: 'Pure Solid', description: 'Clean luxury background without overlay', previewIcon: '⬜' },
   { id: 'mandala', name: 'Sacred Mandala', description: 'Intricate traditional geometric medallion', previewIcon: '☸️' },
   { id: 'floral', name: 'Floral Watermark', description: 'Soft botanical floral etchings', previewIcon: '🌸' },
@@ -292,6 +303,7 @@ export const PATTERN_OPTIONS: PatternOption[] = [
 ];
 
 export const BORDER_OPTIONS: BorderOption[] = [
+  { id: 'royal-peacock', name: 'Royal Peacock & Paisley (मयूर बॉर्डर)', description: '4 majestic corner peacocks with double gold frame' },
   { id: 'none', name: 'No Border', description: 'Full bleed clean canvas' },
   { id: 'jharokha', name: 'Royal Rajasthani Jharokha', description: 'Majestic dome and arch Indian header' },
   { id: 'temple-toran', name: 'South Temple Toran & Flowers', description: 'Festive marigold garland toran' },

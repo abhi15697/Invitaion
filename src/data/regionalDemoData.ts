@@ -10,7 +10,7 @@ export const REGIONAL_DEMO_DATA: Record<LanguageCode, Partial<Record<InvitationC
       groomName: 'राहुल वर्मा',
       bridePhoto: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80',
       groomPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
-      couplePhoto: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80',
+      couplePhoto: '/images/wedding_couple.jpg',
       weddingDate: '2026-12-25',
       weddingTime: '19:00',
       venueName: 'द ग्रैंड पैलेस रिसॉर्ट',

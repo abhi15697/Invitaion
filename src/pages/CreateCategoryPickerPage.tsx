@@ -38,7 +38,9 @@ export const CreateCategoryPickerPage: React.FC = () => {
                 <h3 className="text-lg font-bold font-display text-[#450a0a] group-hover:text-orange-600 transition-colors">
                   {cat.title}
                 </h3>
-                <p className="text-xs text-orange-700 mt-0.5 font-semibold">{cat.templateCount} Boutique Templates</p>
+                <p className="text-xs text-orange-700 mt-0.5 font-semibold">
+                  {cat.templateCount > 0 ? `${cat.templateCount} ${cat.templateCount === 1 ? 'Design Available' : 'Designs Available'}` : 'New Designs In Progress'}
+                </p>
               </div>
             </div>
 

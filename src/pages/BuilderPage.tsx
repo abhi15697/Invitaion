@@ -7,7 +7,6 @@ import type { InvitationCategory } from '../types/invitation';
 import { InvitationForm } from '../components/forms/InvitationForm';
 import { CustomizationPanel } from '../components/builder/CustomizationPanel';
 import { InvitationRenderer } from '../templates/InvitationRenderer';
-import { EnvelopePreview } from '../components/preview/EnvelopePreview';
 import { LanguageSelector } from '../components/common/LanguageSelector';
 import { WordingAssistantModal } from '../components/builder/WordingAssistantModal';
 import { getTranslation } from '../data/languages';
@@ -22,7 +21,6 @@ import {
   Eye,
   ChevronDown,
   BookOpen,
-  Mail,
 } from 'lucide-react';
 
 export const BuilderPage: React.FC = () => {
@@ -38,14 +36,12 @@ export const BuilderPage: React.FC = () => {
   const customization = useInvitationStore((state) => state.customization);
   const zoomLevel = useInvitationStore((state) => state.zoomLevel);
   const activeTab = useInvitationStore((state) => state.activeTab);
-  const isEnvelopeMode = useInvitationStore((state) => state.isEnvelopeMode);
-  const toggleEnvelopeMode = useInvitationStore((state) => state.toggleEnvelopeMode);
+  const formDataMap = useInvitationStore((state) => state.formDataMap);
 
   const setCategory = useInvitationStore((state) => state.setCategory);
   const setTemplateId = useInvitationStore((state) => state.setTemplateId);
   const setZoomLevel = useInvitationStore((state) => state.setZoomLevel);
   const setActiveTab = useInvitationStore((state) => state.setActiveTab);
-  const getActiveFormData = useInvitationStore((state) => state.getActiveFormData);
 
   const t = (key: string) => getTranslation(selectedLanguage, key);
 
@@ -60,7 +56,7 @@ export const BuilderPage: React.FC = () => {
   }, [urlCategory, activeCategory, setCategory]);
 
   const categoryTemplates = getTemplatesByCategory(activeCategory);
-  const currentFormData = getActiveFormData();
+  const currentFormData = formDataMap[activeCategory] || {};
 
   const invitationData = {
     category: activeCategory,
@@ -145,24 +141,6 @@ export const BuilderPage: React.FC = () => {
               <span className="sm:hidden">Wording</span>
             </button>
 
-            {/* 3D Envelope Mode Toggle Button */}
-            <button
-              type="button"
-              onClick={() => {
-                soundEffects.playSoftClick();
-                toggleEnvelopeMode();
-              }}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 cursor-pointer ${
-                isEnvelopeMode
-                  ? 'bg-gradient-to-r from-orange-500 via-red-500 to-rose-600 text-white shadow-md shadow-orange-500/25'
-                  : 'bg-white hover:bg-orange-50 border border-orange-200 text-[#78350f]'
-              }`}
-              title="GreetingsIsland-style 3D Envelope Preview"
-            >
-              <Mail className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">3D Envelope</span>
-            </button>
-
             {/* Generate & Export CTA */}
             <button
               type="button"
@@ -243,71 +221,69 @@ export const BuilderPage: React.FC = () => {
           <div className="flex items-center justify-between w-full max-w-[420px] px-3 py-1.5 rounded-xl bg-white/95 border border-orange-200 text-xs text-[#78350f] shadow-md">
             <span className="font-semibold text-orange-900 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-              <span>{isEnvelopeMode ? '3D Envelope View' : 'Live Canvas (1080×1350)'}</span>
+              <span>Live Canvas (1080×1350)</span>
             </span>
 
             <div className="flex items-center space-x-2">
-              {!isEnvelopeMode && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      soundEffects.playSoftClick();
-                      setZoomLevel(zoomLevel - 0.1);
-                    }}
-                    className="p-1 hover:text-orange-600 rounded hover:bg-orange-50 cursor-pointer"
-                    title="Zoom out"
-                  >
-                    <ZoomOut className="w-3.5 h-3.5" />
-                  </button>
-                  <span className="font-mono text-[11px] text-orange-700 font-bold">
-                    {Math.round(zoomLevel * 100)}%
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      soundEffects.playSoftClick();
-                      setZoomLevel(zoomLevel + 0.1);
-                    }}
-                    className="p-1 hover:text-orange-600 rounded hover:bg-orange-50 cursor-pointer"
-                    title="Zoom in"
-                  >
-                    <ZoomIn className="w-3.5 h-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      soundEffects.playSoftClick();
-                      setZoomLevel(1);
-                    }}
-                    className="p-1 hover:text-orange-600 rounded hover:bg-orange-50 text-[10px] font-bold cursor-pointer"
-                    title="Reset zoom"
-                  >
-                    100%
-                  </button>
-                </>
-              )}
+              <button
+                type="button"
+                onClick={() => {
+                  soundEffects.playSoftClick();
+                  setZoomLevel(zoomLevel - 0.1);
+                }}
+                className="p-1 hover:text-orange-600 rounded hover:bg-orange-50 cursor-pointer"
+                title="Zoom out"
+              >
+                <ZoomOut className="w-3.5 h-3.5" />
+              </button>
+              <span className="font-mono text-[11px] text-orange-700 font-bold">
+                {Math.round(zoomLevel * 100)}%
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  soundEffects.playSoftClick();
+                  setZoomLevel(zoomLevel + 0.1);
+                }}
+                className="p-1 hover:text-orange-600 rounded hover:bg-orange-50 cursor-pointer"
+                title="Zoom in"
+              >
+                <ZoomIn className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  soundEffects.playSoftClick();
+                  setZoomLevel(1);
+                }}
+                className="p-1 hover:text-orange-600 rounded hover:bg-orange-50 text-[10px] font-bold cursor-pointer"
+                title="Reset zoom"
+              >
+                100%
+              </button>
             </div>
           </div>
 
           {/* Canvas Wrapper */}
-          <div className="relative p-2.5 rounded-3xl bg-white border border-orange-200/80 shadow-xl overflow-hidden flex items-center justify-center max-w-full">
-            {isEnvelopeMode ? (
-              <EnvelopePreview data={invitationData} />
-            ) : (
-              <div className="w-[340px] sm:w-[380px] h-[475px] sm:h-[530px] overflow-hidden rounded-2xl relative shadow-2xl bg-black">
-                <div
-                  className="origin-top-left transition-transform duration-200"
-                  style={{
-                    transform: `scale(${0.63 * zoomLevel})`,
-                    marginLeft: '-2px',
-                    marginTop: '-2px',
-                  }}
-                >
-                  <InvitationRenderer ref={canvasRef} data={invitationData} />
-                </div>
+          <div className="w-full flex items-center justify-center p-4 sm:p-6 rounded-3xl bg-white/95 border border-orange-200/80 shadow-xl overflow-hidden">
+            <div
+              className="relative overflow-hidden rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.35)] transition-all duration-200 shrink-0"
+              style={{
+                width: `${Math.round(540 * 0.65 * zoomLevel)}px`,
+                height: `${Math.round(675 * 0.65 * zoomLevel)}px`,
+              }}
+            >
+              <div
+                className="origin-top-left"
+                style={{
+                  width: '540px',
+                  height: '675px',
+                  transform: `scale(${0.65 * zoomLevel})`,
+                }}
+              >
+                <InvitationRenderer ref={canvasRef} data={invitationData} />
               </div>
-            )}
+            </div>
           </div>
 
           <p className="text-[11px] text-[#9a3412] text-center font-medium">

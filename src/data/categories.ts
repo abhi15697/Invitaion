@@ -1,13 +1,13 @@
 import type { CategoryInfo } from '../types/invitation';
+import { TEMPLATES } from './templates';
 
-export const CATEGORIES: CategoryInfo[] = [
+const BASE_CATEGORIES: Omit<CategoryInfo, 'templateCount'>[] = [
   {
     id: 'wedding',
     title: 'Wedding',
     icon: '💍',
     description: 'Celebrate sacred vows and grand union celebrations with timeless elegance.',
-    templateCount: 6,
-    featuredStyle: 'Royal & Floral',
+    featuredStyle: 'Royal Peacock & Gold',
     gradient: 'from-orange-500/20 via-red-500/20 to-rose-600/20',
   },
   {
@@ -15,8 +15,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Birthday',
     icon: '🎂',
     description: 'Throw unforgettable parties with vibrant, playful, and chic designs.',
-    templateCount: 5,
-    featuredStyle: 'Colorful & Fun',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-amber-500/20 via-orange-500/20 to-red-500/20',
   },
   {
@@ -24,8 +23,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Anniversary',
     icon: '🥂',
     description: 'Honor milestones of love, companionship, and shared memories.',
-    templateCount: 4,
-    featuredStyle: 'Romantic & Luxury',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-red-500/20 via-orange-400/20 to-amber-500/20',
   },
   {
@@ -33,8 +31,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Engagement',
     icon: '💎',
     description: 'Announce your official commitment and celebrate the start of forever.',
-    templateCount: 3,
-    featuredStyle: 'Modern & Sparkling',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-orange-400/20 via-amber-400/20 to-red-400/20',
   },
   {
@@ -42,8 +39,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Baby Shower',
     icon: '🍼',
     description: 'Welcome the bundle of joy with gentle pastels and adorable animal themes.',
-    templateCount: 3,
-    featuredStyle: 'Cute & Pastel',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-amber-300/20 via-orange-200/20 to-yellow-400/20',
   },
   {
@@ -51,8 +47,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Baby Announcement',
     icon: '👶',
     description: 'Introduce your newborn to family and friends with sweet birth stats.',
-    templateCount: 2,
-    featuredStyle: 'Sweet & Minimal',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-orange-300/20 via-amber-200/20 to-yellow-300/20',
   },
   {
@@ -60,8 +55,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Graduation',
     icon: '🎓',
     description: 'Commemorate hard-earned academic milestones and future horizons.',
-    templateCount: 2,
-    featuredStyle: 'Prestigious Gold',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-amber-500/20 via-yellow-400/20 to-orange-500/20',
   },
   {
@@ -69,8 +63,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Housewarming',
     icon: '🏡',
     description: 'Warm the new hearth and welcome loved ones into your new sanctuary.',
-    templateCount: 2,
-    featuredStyle: 'Warm Hearth',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-orange-500/20 via-amber-400/20 to-red-400/20',
   },
   {
@@ -78,8 +71,7 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Party & Cocktail',
     icon: '✨',
     description: 'Gather friends for electric evening soirées, dinners, and dance nights.',
-    templateCount: 2,
-    featuredStyle: 'Neon & Glamour',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-orange-500/20 via-red-500/20 to-amber-500/20',
   },
   {
@@ -87,8 +79,12 @@ export const CATEGORIES: CategoryInfo[] = [
     title: 'Religious & Festival',
     icon: '🪔',
     description: 'Invoke divine blessings for pujas, festivals, satsangs, and sacred rites.',
-    templateCount: 2,
-    featuredStyle: 'Sacred Traditional',
+    featuredStyle: 'Coming Soon',
     gradient: 'from-red-600/20 via-orange-500/20 to-amber-400/20',
   },
 ];
+
+export const CATEGORIES: CategoryInfo[] = BASE_CATEGORIES.map((cat) => ({
+  ...cat,
+  templateCount: TEMPLATES.filter((t) => t.category === cat.id).length,
+}));

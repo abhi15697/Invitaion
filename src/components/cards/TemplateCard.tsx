@@ -137,49 +137,61 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({ template, onPreviewM
           }}
           onClick={handleQuickPreview}
         >
+          {/* Background Image if available */}
+          {template.previewImage ? (
+            <>
+              <img
+                src={template.previewImage}
+                alt={template.name}
+                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/60 pointer-events-none" />
+            </>
+          ) : (
+            <>
+              {/* Decorative inner gold foil border for CSS generated designs */}
+              <div
+                className="absolute inset-3 border border-dashed rounded-xl pointer-events-none transition-all duration-300 group-hover:scale-[1.02] group-hover:border-solid"
+                style={{ borderColor: `${template.defaultCustomization.primaryColor}70` }}
+              />
+              <div
+                className="absolute top-2 left-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
+                style={{ color: template.defaultCustomization.primaryColor }}
+              >
+                ✦
+              </div>
+              <div
+                className="absolute top-2 right-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
+                style={{ color: template.defaultCustomization.primaryColor }}
+              >
+                ✦
+              </div>
+              <div
+                className="absolute bottom-2 left-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
+                style={{ color: template.defaultCustomization.primaryColor }}
+              >
+                ✦
+              </div>
+              <div
+                className="absolute bottom-2 right-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
+                style={{ color: template.defaultCustomization.primaryColor }}
+              >
+                ✦
+              </div>
+            </>
+          )}
+
           {/* Animated Diagonal Foil Reflection Sweep on Hover */}
           <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none z-10" />
-
-          {/* Decorative inner gold foil border */}
-          <div
-            className="absolute inset-3 border border-dashed rounded-xl pointer-events-none transition-all duration-300 group-hover:scale-[1.02] group-hover:border-solid"
-            style={{ borderColor: `${template.defaultCustomization.primaryColor}70` }}
-          />
-
-          {/* Animated Corner flourish ornaments that spin on hover */}
-          <div
-            className="absolute top-2 left-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
-            style={{ color: template.defaultCustomization.primaryColor }}
-          >
-            ✦
-          </div>
-          <div
-            className="absolute top-2 right-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
-            style={{ color: template.defaultCustomization.primaryColor }}
-          >
-            ✦
-          </div>
-          <div
-            className="absolute bottom-2 left-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
-            style={{ color: template.defaultCustomization.primaryColor }}
-          >
-            ✦
-          </div>
-          <div
-            className="absolute bottom-2 right-2.5 text-[10px] opacity-50 font-serif pointer-events-none select-none group-hover:rotate-45 group-hover:scale-135 group-hover:opacity-100 transition-all duration-300"
-            style={{ color: template.defaultCustomization.primaryColor }}
-          >
-            ✦
-          </div>
 
           {/* Top Badges Bar */}
           <div className="w-full flex items-center justify-between z-10">
             <span
               className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full backdrop-blur-md group-hover:scale-105 transition-transform"
               style={{
-                backgroundColor: `${template.defaultCustomization.primaryColor}22`,
-                color: template.defaultCustomization.primaryColor,
-                border: `1px solid ${template.defaultCustomization.primaryColor}44`,
+                backgroundColor: `${template.defaultCustomization.primaryColor}33`,
+                color: '#fef08a',
+                border: `1px solid ${template.defaultCustomization.primaryColor}66`,
               }}
             >
               {template.style}
@@ -191,7 +203,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({ template, onPreviewM
                 <span>{template.badge}</span>
               </span>
             ) : (
-              <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/25 backdrop-blur-md border border-white/20 text-white opacity-90">
+              <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white opacity-90">
                 2x Print Ready
               </span>
             )}
@@ -199,28 +211,27 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({ template, onPreviewM
 
           {/* Center Card Typography & Motif */}
           <div className="my-auto space-y-1.5 z-10 max-w-[220px]">
-            <div className="w-8 h-8 mx-auto rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-sm shadow-inner group-hover:scale-120 group-hover:rotate-12 transition-transform duration-300">
+            <div className="w-8 h-8 mx-auto rounded-full bg-black/30 backdrop-blur-sm border border-white/30 flex items-center justify-center text-sm shadow-inner group-hover:scale-120 group-hover:rotate-12 transition-transform duration-300">
               <span>{motif}</span>
             </div>
 
-            <p className="text-[10px] opacity-80 uppercase tracking-widest font-sans font-semibold">
+            <p className="text-[10px] opacity-90 uppercase tracking-widest font-sans font-bold text-amber-200">
               {template.category.replace('-', ' ')}
             </p>
             <h4
-              className="text-xl sm:text-2xl font-bold tracking-tight font-serif line-clamp-1 leading-tight group-hover:scale-105 transition-transform"
-              style={{ color: template.defaultCustomization.primaryColor }}
+              className="text-xl sm:text-2xl font-bold tracking-tight font-serif line-clamp-1 leading-tight group-hover:scale-105 transition-transform drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+              style={{ color: '#fffbeb' }}
             >
               {template.name}
             </h4>
-            <p className="text-[11px] opacity-85 italic font-sans max-w-[190px] mx-auto line-clamp-1">
+            <p className="text-[11px] opacity-90 italic font-sans max-w-[190px] mx-auto line-clamp-1 text-amber-100">
               {template.tagline}
             </p>
           </div>
 
           {/* Bottom subtle invitation date mock */}
           <div
-            className="z-10 text-[9px] opacity-75 tracking-widest uppercase font-sans font-semibold"
-            style={{ color: template.defaultCustomization.textColor }}
+            className="z-10 text-[9px] opacity-90 tracking-widest uppercase font-sans font-semibold text-amber-200 drop-shadow"
           >
             25 DEC 2026 • 7:00 PM
           </div>

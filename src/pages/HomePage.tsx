@@ -41,16 +41,14 @@ export const HomePage: React.FC = () => {
 
   const displayedTemplates = React.useMemo(() => {
     if (templateFilter === 'all') {
-      return TEMPLATES.filter((t) =>
-        ['wedding-royal-gold', 'birthday-colorful-party', 'anniversary-romantic', 'wedding-floral-elegance', 'birthday-neon-party', 'religious-sacred-blessings'].includes(t.id)
-      );
+      return TEMPLATES;
     }
-    return TEMPLATES.filter((t) => t.category === templateFilter).slice(0, 6);
+    return TEMPLATES.filter((t) => t.category === templateFilter);
   }, [templateFilter]);
 
   const heroInvitationData = {
     category: 'wedding' as const,
-    templateId: 'wedding-royal-gold',
+    templateId: 'wedding-royal-peacock',
     fields: DEMO_WEDDING,
     customization: TEMPLATES[0].defaultCustomization,
   };
@@ -206,8 +204,8 @@ export const HomePage: React.FC = () => {
                           <Sparkles className="w-4 h-4" />
                         </div>
                         <div>
-                          <p className="text-xs font-bold truncate max-w-[140px]">Royal Gold Wedding</p>
-                          <p className="text-[10px] text-amber-500 font-semibold">Live 3D Interactive Card</p>
+                          <p className="text-xs font-bold truncate max-w-[140px]">Royal Peacock Wedding</p>
+                          <p className="text-[10px] text-amber-500 font-semibold">Live Interactive Card</p>
                         </div>
                       </div>
                       <Link
@@ -231,7 +229,7 @@ export const HomePage: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { label: 'Indian Languages', val: '11', icon: <Globe className="w-5 h-5 text-orange-500" /> },
-            { label: 'Boutique Templates', val: '35+', icon: <Palette className="w-5 h-5 text-red-500" /> },
+            { label: 'Royal Templates', val: `${TEMPLATES.length}`, icon: <Palette className="w-5 h-5 text-red-500" /> },
             { label: 'Free & No Login', val: '100%', icon: <Award className="w-5 h-5 text-amber-500" /> },
             { label: 'Ultra HD Print Ready', val: '2x', icon: <Zap className="w-5 h-5 text-orange-500" /> },
           ].map((stat, i) => (
@@ -383,9 +381,9 @@ export const HomePage: React.FC = () => {
               <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-500 shadow-sm">
                 <Mail className="w-6 h-6 animate-float" />
               </div>
-              <h3 className={`text-base font-bold ${currentTheme.isDark ? 'text-slate-100' : 'text-[#3f120e]'}`}>3D Animated Envelope</h3>
+              <h3 className={`text-base font-bold ${currentTheme.isDark ? 'text-slate-100' : 'text-[#3f120e]'}`}>Digital Card & WhatsApp Share</h3>
               <p className={`text-xs leading-relaxed font-medium ${currentTheme.isDark ? 'text-slate-300' : 'text-[#78350f]'}`}>
-                GreetingsIsland-style realistic 3D envelope opening with wax seal crack, card elevation, and celebration confetti.
+                One-click WhatsApp sharing with formatted RSVP messages, phone simulator, and high-resolution export.
               </p>
             </div>
           </Interactive3DTilt>
@@ -495,7 +493,7 @@ export const HomePage: React.FC = () => {
                 : 'bg-white border-amber-200 hover:border-amber-400 text-amber-800'
             }`}
           >
-            <span>View All 35+ Designs</span>
+            <span>View All Designs</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -535,15 +533,39 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* Templates Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedTemplates.map((template) => (
-            <TemplateCard
-              key={template.id}
-              template={template}
-              onPreviewModal={(tmpl) => setPreviewTemplate(tmpl)}
-            />
-          ))}
-        </div>
+        {displayedTemplates.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayedTemplates.map((template) => (
+              <TemplateCard
+                key={template.id}
+                template={template}
+                onPreviewModal={(tmpl) => setPreviewTemplate(tmpl)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={`text-center py-12 px-4 rounded-3xl border space-y-3 ${
+            currentTheme.isDark
+              ? 'bg-slate-900/90 border-amber-400/25 text-slate-100'
+              : 'bg-white/90 border-amber-200/80 text-amber-950'
+          }`}>
+            <Sparkles className="w-6 h-6 text-amber-500 mx-auto animate-pulse" />
+            <p className="text-sm font-bold">New templates for this category coming soon!</p>
+            <p className="text-xs max-w-sm mx-auto text-amber-800/70 dark:text-slate-400">
+              Try our signature Royal Peacock Wedding template or start customizing now.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                soundEffects.playSoftClick();
+                setTemplateFilter('all');
+              }}
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-xs shadow-md cursor-pointer"
+            >
+              Show Royal Wedding Template
+            </button>
+          </div>
+        )}
       </section>
 
       {/* 7. CALL TO ACTION BANNER */}
@@ -560,7 +582,7 @@ export const HomePage: React.FC = () => {
               Ready to create your invitation?
             </h2>
             <p className="text-sm sm:text-base text-orange-100 font-medium">
-              Start designing in any Indian language with 35+ stunning free templates.
+              Start designing in any Indian language with our signature handcrafted boutique template.
             </p>
           </div>
 

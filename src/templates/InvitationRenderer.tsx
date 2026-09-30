@@ -2,27 +2,9 @@ import { forwardRef } from 'react';
 import type {
   InvitationData,
   WeddingFields,
-  BirthdayFields,
-  AnniversaryFields,
-  EngagementFields,
-  BabyShowerFields,
-  BabyAnnouncementFields,
-  GraduationFields,
-  HousewarmingFields,
-  PartyFields,
-  ReligiousFields,
 } from '../types/invitation';
 import { BackgroundPatternRenderer, BorderFrameRenderer, MotifRenderer } from '../components/common/Decorations';
-import { WeddingTemplates } from './WeddingTemplates';
-import { BirthdayTemplates } from './BirthdayTemplates';
-import { AnniversaryTemplates } from './AnniversaryTemplates';
-import { EngagementTemplates } from './EngagementTemplates';
-import { BabyShowerTemplates } from './BabyShowerTemplates';
-import { BabyAnnouncementTemplates } from './BabyAnnouncementTemplates';
-import { GraduationTemplates } from './GraduationTemplates';
-import { HousewarmingTemplates } from './HousewarmingTemplates';
-import { PartyTemplates } from './PartyTemplates';
-import { ReligiousTemplates } from './ReligiousTemplates';
+import { RoyalPeacockWedding, EmbossedIvoryPeacockWedding } from './wedding';
 
 interface InvitationRendererProps {
   data: InvitationData;
@@ -79,35 +61,25 @@ const getFontFamilyClass = (fontKey: string) => {
 
 export const InvitationRenderer = forwardRef<HTMLDivElement, InvitationRendererProps>(
   ({ data, scale = 1, className = '' }, ref) => {
-    const { category, templateId, fields, customization } = data;
+    const { templateId, fields, customization } = data;
     const fontClass = getFontFamilyClass(customization.fontFamily);
     const stickers = customization.stickers || [];
 
-    const renderCategoryContent = () => {
-      switch (category) {
-        case 'wedding':
-          return <WeddingTemplates fields={fields as WeddingFields} customization={customization} templateId={templateId} />;
-        case 'birthday':
-          return <BirthdayTemplates fields={fields as BirthdayFields} customization={customization} templateId={templateId} />;
-        case 'anniversary':
-          return <AnniversaryTemplates fields={fields as AnniversaryFields} customization={customization} templateId={templateId} />;
-        case 'engagement':
-          return <EngagementTemplates fields={fields as EngagementFields} customization={customization} templateId={templateId} />;
-        case 'baby-shower':
-          return <BabyShowerTemplates fields={fields as BabyShowerFields} customization={customization} templateId={templateId} />;
-        case 'baby-announcement':
-          return <BabyAnnouncementTemplates fields={fields as BabyAnnouncementFields} customization={customization} templateId={templateId} />;
-        case 'graduation':
-          return <GraduationTemplates fields={fields as GraduationFields} customization={customization} templateId={templateId} />;
-        case 'housewarming':
-          return <HousewarmingTemplates fields={fields as HousewarmingFields} customization={customization} templateId={templateId} />;
-        case 'party':
-          return <PartyTemplates fields={fields as PartyFields} customization={customization} templateId={templateId} />;
-        case 'religious':
-          return <ReligiousTemplates fields={fields as ReligiousFields} customization={customization} templateId={templateId} />;
-        default:
-          return <WeddingTemplates fields={fields as WeddingFields} customization={customization} templateId={templateId} />;
+    const renderWeddingTemplate = () => {
+      if (templateId === 'wedding-embossed-ivory-peacock') {
+        return (
+          <EmbossedIvoryPeacockWedding
+            fields={fields as WeddingFields}
+            customization={customization}
+          />
+        );
       }
+      return (
+        <RoyalPeacockWedding
+          fields={fields as WeddingFields}
+          customization={customization}
+        />
+      );
     };
 
     return (
@@ -125,16 +97,20 @@ export const InvitationRenderer = forwardRef<HTMLDivElement, InvitationRendererP
         }}
       >
         {/* Dynamic Background Pattern */}
-        <BackgroundPatternRenderer
-          pattern={customization.backgroundPattern}
-          color={customization.primaryColor}
-        />
+        {customization.backgroundPattern && customization.backgroundPattern !== 'none' && (
+          <BackgroundPatternRenderer
+            pattern={customization.backgroundPattern}
+            color={customization.primaryColor}
+          />
+        )}
 
         {/* Dynamic Border Frame */}
-        <BorderFrameRenderer
-          style={customization.borderStyle}
-          color={customization.primaryColor}
-        />
+        {customization.borderStyle && customization.borderStyle !== 'none' && (
+          <BorderFrameRenderer
+            style={customization.borderStyle}
+            color={customization.primaryColor}
+          />
+        )}
 
         {/* Placed Stickers / Motifs Layer */}
         {stickers.map((stk) => (
@@ -156,7 +132,7 @@ export const InvitationRenderer = forwardRef<HTMLDivElement, InvitationRendererP
         ))}
 
         {/* Template Category Content */}
-        {renderCategoryContent()}
+        {renderWeddingTemplate()}
       </div>
     );
   }
